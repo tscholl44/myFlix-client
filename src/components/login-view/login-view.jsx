@@ -9,8 +9,8 @@ export const LoginView = ({ onLoggedIn }) => {
     event.preventDefault();
 
     const data = {
-      access: name,
-      secret: password
+      name,
+      password
     };
 
     fetch("https://toms-flix-a1bb67bc1c05.herokuapp.com/login", {
@@ -34,13 +34,14 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <label>
         name:
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
         />
       </label>
       <label>
@@ -49,9 +50,10 @@ export const LoginView = ({ onLoggedIn }) => {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit" onClick={handleSubmit}>Submit</button>
     </form>
   );
 };
