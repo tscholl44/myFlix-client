@@ -22,7 +22,7 @@ export const MainView = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        const moviesFromApi = data.docs.map((doc) => {
+        const moviesFromApi = data.map((doc) => {
           return {
             id: doc.key,
             title: doc.title,
@@ -33,7 +33,7 @@ export const MainView = () => {
             },
             director: {
               name: doc.director.name,
-              bio: doc.bio.name
+              bio: doc.director.bio
             },
             actors: [doc.actors]
           };
@@ -76,7 +76,7 @@ export const MainView = () => {
     );
   }
 
-  if (books.length === 0) {
+  if (movies.length === 0) {
     return (
       <>
         <button

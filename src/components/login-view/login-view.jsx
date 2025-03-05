@@ -15,6 +15,9 @@ export const LoginView = ({ onLoggedIn }) => {
 
     fetch("https://toms-flix-a1bb67bc1c05.herokuapp.com/login", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+    },
       body: JSON.stringify(data)
     })
       .then((response) => response.json())
