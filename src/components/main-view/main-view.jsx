@@ -14,8 +14,9 @@ export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
   const [movies, setMovies] = useState([]);
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  
   
   useEffect(() => {
     if (!token) {
@@ -87,6 +88,20 @@ export const MainView = () => {
             }
           />
           <Route
+            path="/profile"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                  <Col md={8}>
+                    <ProfileView user={user} />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
             path="/movies/:movieId"
             element={
               <>
@@ -125,11 +140,7 @@ export const MainView = () => {
           />
         </Routes>
       </Row>
-      <Routes>
-        <Route path="/" element={<MovieCard movies={movies} />} />
-        <Route path="/movies/:movieId" element={<MovieView movies={movies} />} />
-        <Route path="/profile" element={<ProfileView user={user} token={token} movies={movies} setUser={setUser} />} />
-      </Routes>
     </BrowserRouter>
   );
 };
+
