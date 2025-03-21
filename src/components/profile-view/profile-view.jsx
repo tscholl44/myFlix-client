@@ -38,7 +38,9 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
         .catch(error => console.error('Error deleting account:', error));
     };
 
-    const favoriteMovies = movies.filter(m => user.FavoriteMovies.includes(m._id));
+    const favoriteMovies = movies && user?.FavoriteMovies 
+        ? movies.filter(m => user.FavoriteMovies.includes(m._id)) 
+        : [];
 
     return (
         <Container className="profile-view mt-4">
