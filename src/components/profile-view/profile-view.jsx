@@ -14,7 +14,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
 
     const handleUpdate = (event) => {
         event.preventDefault();
-        axios.put(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.Username}`, updatedUser, {
+        axios.put(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}`, updatedUser, {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(response => {
@@ -27,7 +27,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
     const handleDelete = () => {
         if (!window.confirm('Are you sure you want to delete your account?')) return;
         
-        axios.delete(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.Username}`, {
+        axios.delete(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(() => {
@@ -49,7 +49,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
                 <Form onSubmit={handleUpdate}>
                     <Form.Group className="mb-3">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" value={updatedUser.Username} onChange={e => setUpdatedUser({...updatedUser, Username: e.target.value})} required />
+                        <Form.Control type="text" value={updatedUser.name} onChange={e => setUpdatedUser({...updatedUser, Username: e.target.value})} required />
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Password</Form.Label>
