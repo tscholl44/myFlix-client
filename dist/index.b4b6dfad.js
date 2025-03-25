@@ -18610,17 +18610,20 @@ const MainView = ()=>{
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
     const [movies, setMovies] = (0, _react.useState)([]);
-    const [user, setUser] = (0, _react.useState)(null);
-    const [token, setToken] = (0, _react.useState)(null);
+    const [user, setUser] = (0, _react.useState)(storedUser);
+    const [token, setToken] = (0, _react.useState)(storedToken);
     (0, _react.useEffect)(()=>{
         if (!token) return;
         fetch("https://toms-flix-a1bb67bc1c05.herokuapp.com/movies", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then((response)=>response.json()).then((data)=>{
-            const moviesFromApi = data.map((doc)=>{
-                return {
+        }).then((response)=>{
+            if (!response.ok) throw new Error("Failed to fetch movies");
+            return response.json();
+        }).then((data)=>{
+            console.log("API Response:", data); // Add this line
+            const moviesFromApi = data.map((doc)=>({
                     id: doc.key,
                     title: doc.title,
                     description: doc.description,
@@ -18632,12 +18635,11 @@ const MainView = ()=>{
                         name: doc.director.name,
                         bio: doc.director.bio
                     },
-                    actors: [
-                        doc.actors
-                    ]
-                };
-            });
+                    actors: doc.actors
+                }));
             setMovies(moviesFromApi);
+        }).catch((error)=>{
+            console.error("Error fetching movies:", error);
         });
     }, [
         token
@@ -18651,7 +18653,7 @@ const MainView = ()=>{
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 54,
+                lineNumber: 61,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -18665,24 +18667,24 @@ const MainView = ()=>{
                                     to: "/"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 67,
+                                    lineNumber: 74,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     md: 5,
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signupView.SignupView), {}, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 70,
+                                        lineNumber: 77,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 69,
+                                    lineNumber: 76,
                                     columnNumber: 19
                                 }, void 0)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 62,
+                            lineNumber: 69,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -18692,7 +18694,7 @@ const MainView = ()=>{
                                     to: "/"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 81,
+                                    lineNumber: 88,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     md: 5,
@@ -18700,18 +18702,18 @@ const MainView = ()=>{
                                         onLoggedIn: (user)=>setUser(user)
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 84,
+                                        lineNumber: 91,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 83,
+                                    lineNumber: 90,
                                     columnNumber: 19
                                 }, void 0)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 76,
+                            lineNumber: 83,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -18722,7 +18724,7 @@ const MainView = ()=>{
                                     replace: true
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 95,
+                                    lineNumber: 102,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     md: 8,
@@ -18730,18 +18732,18 @@ const MainView = ()=>{
                                         user: user
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 98,
+                                        lineNumber: 105,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 97,
+                                    lineNumber: 104,
                                     columnNumber: 19
                                 }, void 0)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 90,
+                            lineNumber: 97,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -18752,13 +18754,13 @@ const MainView = ()=>{
                                     replace: true
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 109,
+                                    lineNumber: 116,
                                     columnNumber: 19
                                 }, void 0) : movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     children: "The list is empty!"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 111,
+                                    lineNumber: 118,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     md: 8,
@@ -18766,18 +18768,18 @@ const MainView = ()=>{
                                         movies: movies
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 114,
+                                        lineNumber: 121,
                                         columnNumber: 21
                                     }, void 0)
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 113,
+                                    lineNumber: 120,
                                     columnNumber: 19
                                 }, void 0)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 104,
+                            lineNumber: 111,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -18788,13 +18790,13 @@ const MainView = ()=>{
                                     replace: true
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 126,
+                                    lineNumber: 133,
                                     columnNumber: 19
                                 }, void 0) : movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     children: "The list is empty!"
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 128,
+                                    lineNumber: 135,
                                     columnNumber: 19
                                 }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                                     children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
@@ -18804,40 +18806,40 @@ const MainView = ()=>{
                                                 movie: movie
                                             }, void 0, false, {
                                                 fileName: "src/components/main-view/main-view.jsx",
-                                                lineNumber: 133,
+                                                lineNumber: 140,
                                                 columnNumber: 25
                                             }, void 0)
                                         }, movie.id, false, {
                                             fileName: "src/components/main-view/main-view.jsx",
-                                            lineNumber: 132,
+                                            lineNumber: 139,
                                             columnNumber: 23
                                         }, void 0))
                                 }, void 0, false)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 121,
+                            lineNumber: 128,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 61,
+                    lineNumber: 68,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 60,
+                lineNumber: 67,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 53,
+        lineNumber: 60,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "G+gU3cQbHvHlzXx+eNRbbuJNBF0=");
+_s(MainView, "KPSVDk2/5C10tIdwgsos3xs4LVw=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -18872,7 +18874,7 @@ const MovieCard = ({ movie, user, setUser })=>{
     const isFavorite = user?.FavoriteMovies?.includes(movie._id);
     const handleFavorite = ()=>{
         const method = isFavorite ? "DELETE" : "POST";
-        fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
+        fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/movies/${movie._id}`, {
             method,
             headers: {
                 "Content-Type": "application/json",
@@ -18888,7 +18890,7 @@ const MovieCard = ({ movie, user, setUser })=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Img, {
                 variant: "top",
                 src: movie.ImagePath,
-                alt: movie.Title
+                alt: movie.title
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
                 lineNumber: 35,
@@ -18897,7 +18899,7 @@ const MovieCard = ({ movie, user, setUser })=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Title, {
-                        children: movie.Title
+                        children: movie.title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
                         lineNumber: 37,
@@ -18905,7 +18907,7 @@ const MovieCard = ({ movie, user, setUser })=>{
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                         children: [
-                            movie.Description.substring(0, 100),
+                            movie.description.substring(0, 100),
                             "..."
                         ]
                     }, void 0, true, {
@@ -35338,16 +35340,17 @@ const MovieView = ({ movie, onBackClick })=>{
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                    src: movie.image
+                    src: movie?.image || "https://via.placeholder.com/150",
+                    alt: movie?.title || "Placeholder"
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
                     lineNumber: 7,
-                    columnNumber: 11
+                    columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/movie-view/movie-view.jsx",
                 lineNumber: 6,
-                columnNumber: 9
+                columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
@@ -35356,20 +35359,20 @@ const MovieView = ({ movie, onBackClick })=>{
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 10,
-                        columnNumber: 11
+                        columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: movie.title
+                        children: movie?.title || "N/A"
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 11,
-                        columnNumber: 11
+                        columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-view/movie-view.jsx",
                 lineNumber: 9,
-                columnNumber: 9
+                columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
@@ -35378,20 +35381,20 @@ const MovieView = ({ movie, onBackClick })=>{
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 14,
-                        columnNumber: 11
+                        columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: movie.director
+                        children: movie?.director || "N/A"
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 15,
-                        columnNumber: 11
+                        columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-view/movie-view.jsx",
                 lineNumber: 13,
-                columnNumber: 9
+                columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                 onClick: onBackClick,
@@ -35403,13 +35406,13 @@ const MovieView = ({ movie, onBackClick })=>{
             }, void 0, false, {
                 fileName: "src/components/movie-view/movie-view.jsx",
                 lineNumber: 17,
-                columnNumber: 9
+                columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-view/movie-view.jsx",
         lineNumber: 5,
-        columnNumber: 7
+        columnNumber: 5
     }, undefined);
 };
 _c = MovieView;
@@ -35880,7 +35883,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
     ]);
     const handleUpdate = (event)=>{
         event.preventDefault();
-        (0, _axiosDefault.default).put(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.Username}`, updatedUser, {
+        (0, _axiosDefault.default).put(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}`, updatedUser, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -35891,7 +35894,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
     };
     const handleDelete = ()=>{
         if (!window.confirm('Are you sure you want to delete your account?')) return;
-        (0, _axiosDefault.default).delete(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.Username}`, {
+        (0, _axiosDefault.default).delete(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -35931,7 +35934,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                         type: "text",
-                                        value: updatedUser.Username,
+                                        value: updatedUser.name,
                                         onChange: (e)=>setUpdatedUser({
                                                 ...updatedUser,
                                                 Username: e.target.value
