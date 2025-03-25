@@ -14,7 +14,7 @@ export const MovieCard = ({ movie, user, setUser }) => {
   const handleFavorite = () => {
     const method = isFavorite ? "DELETE" : "POST";
 
-    fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.Username}/movies/${movie._id}`, {
+    fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/movies/${movie._id}`, {
       method,
       headers: { 
         "Content-Type": "application/json",
@@ -32,10 +32,10 @@ export const MovieCard = ({ movie, user, setUser }) => {
 
   return (
     <Card className="h-100 shadow-sm">
-      <Card.Img variant="top" src={movie.ImagePath} alt={movie.Title} />
+      <Card.Img variant="top" src={movie.ImagePath} alt={movie.title} />
       <Card.Body>
-        <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Description.substring(0, 100)}...</Card.Text>
+        <Card.Title>{movie.title}</Card.Title>
+        <Card.Text>{movie.description.substring(0, 100)}...</Card.Text>
         <Button variant="primary" onClick={() => navigate(`/movies/${movie._id}`)}>
           View Details
         </Button>
