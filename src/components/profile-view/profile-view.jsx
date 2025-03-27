@@ -14,7 +14,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
 
     const handleUpdate = (event) => {
         event.preventDefault();
-        axios.put(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}`, updatedUser, {
+        axios.put(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/favoriteMovies/${movie.id}`, updatedUser, {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(response => {
@@ -27,7 +27,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
     const handleDelete = () => {
         if (!window.confirm('Are you sure you want to delete your account?')) return;
         
-        axios.delete(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}`, {
+        axios.delete(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/favoriteMovies/${movie.id}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(() => {
