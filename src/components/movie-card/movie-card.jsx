@@ -7,27 +7,29 @@ import { useNavigate } from "react-router-dom";
 
 export const MovieCard = ({ movie, user, setUser }) => {
   const navigate = useNavigate();
-  
-  // Check if the movie is already a favorite
-  const isFavorite = user?.FavoriteMovies?.includes(movie._id);
 
-  const handleFavorite = () => {
-    const method = isFavorite ? "DELETE" : "POST";
-
-    fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/movies/${movie._id}`, {
-      method,
-      headers: { 
+  const handleAddToFavorites = () => {
+    fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/favoriteMovies/${movie.id}`, {
+      method: "POST",
+      headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     })
-    .then(res => res.json())
-    .then(updatedUser => {
-      if (updatedUser) {
-        setUser(updatedUser); // Update user state to reflect new favorite status
-      }
-    })
-    .catch(error => console.error("Error updating favorites:", error));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to add movie to favorites");
+        }
+        return response.json();
+      })
+      .then((updatedUser) => {
+        setUser(updatedUser); // Update the user state with the updated user data
+        alert(`${movie.title} has been added to your favorites!`);
+      })
+      .catch((error) => {
+        console.error("Error adding movie to favorites:", error);
+        alert("Something went wrong. Please try again.");
+      });
   };
 
   return (
@@ -36,15 +38,15 @@ export const MovieCard = ({ movie, user, setUser }) => {
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title>
         <Card.Text>{movie.description.substring(0, 100)}...</Card.Text>
-        <Button variant="primary" onClick={() => navigate(`/movies/${movie._id}`)}>
-          View Details
-        </Button>
-        <Button 
-          variant={isFavorite ? "danger" : "success"} 
-          onClick={handleFavorite} 
-          className="ms-2"
+        <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
+          <Button variant="link">More Details</Button>
+        </Link>
+        <Button
+          variant="primary"
+          className="mt-2"
+          onClick={handleAddToFavorites}
         >
-          {isFavorite ? "Unfavorite" : "Favorite"}
+          Add to Favorites
         </Button>
       </Card.Body>
     </Card>
@@ -57,13 +59,17 @@ MovieCard.propTypes = {
     description: PropTypes.string.isRequired,
     genre: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired
+      description: PropTypes.string.isRequired,
     }),
     director: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      bio: PropTypes.string
+      bio: PropTypes.string,
     }),
-    actors: PropTypes.string
+    actors: PropTypes.string,
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  user: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    favoriteMovies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+  setUser: PropTypes.func.isRequired,
 };
