@@ -34,20 +34,20 @@ export const MainView = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("API Response:", data); // Add this line
-        const moviesFromApi = data.map((doc) => ({
-          id: doc.key,
-          title: doc.title,
-          description: doc.description,
+        console.log("API Response:", data); 
+        const moviesFromApi = data.map((movie) => ({
+          id: movie._id.toString(),
+          _id: movie._id,
+          title: movie.title,
+          description: movie.description,
           genre: {
-            name: doc.genre.name,
-            description: doc.genre.description
+            name: movie.genre.name,
+            description: movie.genre.description
           },
           director: {
-            name: doc.director.name,
-            bio: doc.director.bio
+            name: movie.director.name,
+            bio: movie.director.bio
           },
-          actors: doc.actors
         }));
         setMovies(moviesFromApi);
       })
@@ -137,7 +137,7 @@ export const MainView = () => {
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-4" key={movie.id} md={3}>
-                        <MovieCard movie={movie} />
+                        <MovieCard movie={movie} user={user} setUser={setUser} />
                       </Col>
                     ))}
                   </>
