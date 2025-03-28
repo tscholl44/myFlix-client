@@ -3,33 +3,13 @@ import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import { useNavigate } from "react-router-dom";
+export const MovieCard = ({ movie, user, handleFavoriteUpdate }) => {
+  const isFavorite = user.favoriteMovies.includes(movie._id);
 
-export const MovieCard = ({ movie, user, setUser }) => {
-  const navigate = useNavigate();
-
-  const handleAddToFavorites = () => {
-    fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/favoriteMovies/${movie.id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to add movie to favorites");
-        }
-        return response.json();
-      })
-      .then((updatedUser) => {
-        setUser(updatedUser); // Update the user state with the updated user data
-        alert(`${movie.title} has been added to your favorites!`);
-      })
-      .catch((error) => {
-        console.error("Error adding movie to favorites:", error);
-        alert("Something went wrong. Please try again.");
-      });
+  const toggleFavorite = () => {
+    const action = isFavorite ? "remove" : "add";
+    console.log(`toggleFavorite called for movieId: ${movie._id}, action: ${action}`);
+    handleFavoriteUpdate(movie._id, action);
   };
 
   return (
@@ -42,9 +22,9 @@ export const MovieCard = ({ movie, user, setUser }) => {
           <Button variant="link">More Details</Button>
         </Link>
         <Button
-          variant="primary"
+          variant={isFavorite ? 'danger' : 'primary'}
           className="mt-2"
-          onClick={handleAddToFavorites}
+          onClick={toggleFavorite}
         >
           Add to Favorites
         </Button>
@@ -55,21 +35,12 @@ export const MovieCard = ({ movie, user, setUser }) => {
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    genre: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-    }),
-    director: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      bio: PropTypes.string,
-    }),
-    actors: PropTypes.string,
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
   }).isRequired,
   user: PropTypes.shape({
-    Username: PropTypes.string.isRequired,
     favoriteMovies: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
-  setUser: PropTypes.func.isRequired,
+  handleFavoriteUpdate: PropTypes.func.isRequired,
 };
