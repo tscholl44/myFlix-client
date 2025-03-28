@@ -1,24 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { MovieCard } from '../movie-card/movie-card';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 
 export const ProfileView = ({ user, token, movies, setUser }) => {
     const [updatedUser, setUpdatedUser] = useState(user);
+    const [userFavoriteMovies, setFavoriteMovies] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
         setUpdatedUser(user);
     }, [user]);
 
+    useEffect(() => {
+        if (movies && user?.favoriteMovies) {
+            const favoriteMoviesList = movies.filter(m => user.favoriteMovies.includes(m._id));
+            setFavoriteMovies(favoriteMoviesList);
+        } else {
+            setFavoriteMovies([]);
+        }
+    }, [movies, user]);
+
     const handleUpdate = (event) => {
         event.preventDefault();
-        axios.put(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/favoriteMovies/${movie.id}`, updatedUser, {
-            headers: { Authorization: `Bearer ${token}` }
+        fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(updatedUser)
         })
         .then(response => {
-            setUser(response.data);
+            if (!response.ok) {
+                throw new Error('Failed to update profile');
+            }
+            return response.json();
+        })
+        .then(data => {
+            setUser(data);
             alert('Profile updated successfully!');
         })
         .catch(error => console.error('Error updating profile:', error));
@@ -26,11 +46,17 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
 
     const handleDelete = () => {
         if (!window.confirm('Are you sure you want to delete your account?')) return;
-        
-        axios.delete(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/favoriteMovies/${movie.id}`, {
-            headers: { Authorization: `Bearer ${token}` }
+
+        fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         })
-        .then(() => {
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete account');
+            }
             alert('Account deleted successfully');
             setUser(null);
             navigate('/');
@@ -38,9 +64,30 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
         .catch(error => console.error('Error deleting account:', error));
     };
 
-    const favoriteMovies = movies && user?.FavoriteMovies 
-        ? movies.filter(m => user.FavoriteMovies.includes(m._id)) 
-        : [];
+    const handleFavoriteUpdate = (movieId, action) => {
+        const updatedFavorites = action === 'add'
+            ? [...user.favoriteMovies, movieId]
+            : user.favoriteMovies.filter(id => id !== movieId);
+
+        fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/favoriteMovies/${movieId}`, {
+            method: action === 'add' ? 'POST' : 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to update favorite movies');
+            }
+            return response.json();
+        })
+        .then(updatedUserData => {
+            setUser(updatedUserData);
+            setFavoriteMovies(movies.filter(m => updatedFavorites.includes(m._id)));
+        })
+        .catch(error => console.error('Error updating favorite movies:', error));
+    };
 
     return (
         <Container className="profile-view mt-4">
@@ -69,11 +116,20 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
             </Card>
             <h3 className="mt-5">Favorite Movies</h3>
             <Row className="mt-3">
-                {favoriteMovies.map(movie => (
-                    <Col md={4} key={movie._id} className="mb-3">
-                        <MovieCard movie={movie} />
-                    </Col>
-                ))}
+                {userFavoriteMovies.length > 0 ? (
+                    userFavoriteMovies.map(movie => (
+                        <Col md={4} key={movie._id} className="mb-3">
+                            <MovieCard
+                                movie={movie}
+                                user={user}
+                                setUser={setUser}
+                                handleFavoriteUpdate={handleFavoriteUpdate}
+                            />
+                        </Col>
+                    ))
+                ) : (
+                    <p className="text-center">You have no favorite movies yet.</p>
+                )}
             </Row>
         </Container>
     );
