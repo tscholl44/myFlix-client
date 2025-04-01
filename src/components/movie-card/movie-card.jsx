@@ -18,7 +18,7 @@ export const MovieCard = ({ movie, user, handleFavoriteUpdate }) => {
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title>
         <Card.Text>{movie.description.substring(0, 100)}...</Card.Text>
-        <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
+        <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
           <Button variant="link">More Details</Button>
         </Link>
         <Button
@@ -26,7 +26,7 @@ export const MovieCard = ({ movie, user, handleFavoriteUpdate }) => {
           className="mt-2"
           onClick={toggleFavorite}
         >
-          Add to Favorites
+          Add / Remove Favorite
         </Button>
       </Card.Body>
     </Card>
