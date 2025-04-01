@@ -52,40 +52,29 @@ export const MainView = () => {
       });
   }, [token]);
 
-  // Define handleFavoriteUpdate
   const handleFavoriteUpdate = (movieId, action) => {
-    const updatedFavorites =
-      action === "add"
-        ? [...user.favoriteMovies, movieId]
-        : user.favoriteMovies.filter((id) => id !== movieId);
-
-    fetch(
-      `https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/favoriteMovies/${movieId}`,
-      {
-        method: action === "add" ? "POST" : "DELETE",
+    fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/favoriteMovies/${movieId}`, {
+        method: action === 'add' ? 'POST' : 'DELETE',
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to update favorite movies");
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
         }
-        return response.json();
-      })
-      .then((updatedUserData) => {
-        setUser(updatedUserData);
-        setMovies((prevMovies) =>
-          prevMovies.map((movie) =>
-            updatedFavorites.includes(movie._id)
-              ? { ...movie, isFavorite: true }
-              : { ...movie, isFavorite: false }
-          )
-        );
-      })
-      .catch((error) => console.error("Error updating favorite movies:", error));
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to update favorite movies');
+        }
+        return fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    })
+    .then(response => response.json())
+    .then(updatedUserData => {
+        setUser(updatedUserData); // Update the user state with the new favoriteMovies list
+    })
+    .catch(error => console.error('Error updating favorite movies:', error));
   };
 
   return (
@@ -134,7 +123,13 @@ export const MainView = () => {
                   <Navigate to="/login" replace />
                 ) : (
                   <Col md={8}>
-                    <ProfileView user={user} />
+                    <ProfileView
+                      user={user}
+                      token={token}
+                      movies={movies}
+                      setUser={setUser}
+                      handleFavoriteUpdate={handleFavoriteUpdate}
+                    />
                   </Col>
                 )}
               </>
@@ -167,7 +162,7 @@ export const MainView = () => {
                 ) : (
                   <>
                     {movies.map((movie) => (
-                      <Col className="mb-4" key={movie.id} md={3}>
+                      <Col className="mb-4" key={movie._id} md={3}>
                         <MovieCard
                           movie={movie}
                           user={user}
