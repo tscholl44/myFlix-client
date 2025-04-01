@@ -3,7 +3,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 
-export const ProfileView = ({ user, token, movies, setUser }) => {
+export const ProfileView = ({ user, token, movies, setUser, handleFavoriteUpdate }) => {
     const [updatedUser, setUpdatedUser] = useState(user);
     const [userFavoriteMovies, setFavoriteMovies] = useState([]);
     const navigate = useNavigate();
@@ -14,7 +14,9 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
 
     useEffect(() => {
         if (movies && user?.favoriteMovies) {
-            const favoriteMoviesList = movies.filter(m => user.favoriteMovies.includes(m._id));
+            const favoriteMoviesList = movies.filter((movie) =>
+                user.favoriteMovies.includes(movie._id)
+            );
             setFavoriteMovies(favoriteMoviesList);
         } else {
             setFavoriteMovies([]);
@@ -62,31 +64,6 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
             navigate('/');
         })
         .catch(error => console.error('Error deleting account:', error));
-    };
-
-    const handleFavoriteUpdate = (movieId, action) => {
-        const updatedFavorites = action === 'add'
-            ? [...user.favoriteMovies, movieId]
-            : user.favoriteMovies.filter(id => id !== movieId);
-
-        fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/favoriteMovies/${movieId}`, {
-            method: action === 'add' ? 'POST' : 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to update favorite movies');
-            }
-            return response.json();
-        })
-        .then(updatedUserData => {
-            setUser(updatedUserData);
-            setFavoriteMovies(movies.filter(m => updatedFavorites.includes(m._id)));
-        })
-        .catch(error => console.error('Error updating favorite movies:', error));
     };
 
     return (
