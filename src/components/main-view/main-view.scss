@@ -12,7 +12,7 @@ $text-color: #333;
 
   .movie-list {
     @extend .d-flex !optional;
-    @extend .flex-wrap;
+    @extend .flex-wrap !optional;
     @extend .justify-content-center;
     gap: 20px; // Bootstrap doesn't have a gap utility yet, so we add it here
   }
