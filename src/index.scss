@@ -1,3 +1,70 @@
+// Import Bootstrap
 @import '~bootstrap/scss/bootstrap.scss';
-@import './components/main-view/main-view.scss';
-@import './components/movie-view/movie-view.scss';
+
+// Custom Variables
+$primary-color: #007bff; // Bootstrap primary color
+$secondary-color: #6c757d; // Bootstrap secondary color
+$background-color: #f8f9fa; // Light background
+$text-color: #343a40; // Dark text color
+$link-hover-color: #0056b3;
+
+// Global Styles
+body {
+  background-color: $background-color;
+  color: $text-color;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: underline;
+  }
+}
+
+// Navbar Styling
+.navbar {
+  background-color: $primary-color;
+  .navbar-brand, .nav-link {
+    color: #fff !important;
+    &:hover {
+      color: $link-hover-color !important;
+    }
+  }
+}
+
+// Buttons
+.btn-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    border-color: darken($primary-color, 10%);
+  }
+}
+
+// Custom Container
+.container {
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+// Footer
+.footer {
+  background-color: $secondary-color;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
