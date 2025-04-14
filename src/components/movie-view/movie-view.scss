@@ -1,7 +1,65 @@
-.back-button {
-    padding: 4px 12px 4px 12px;
-    color: whitesmoke;
-    background-color: dodgerblue;
-    border: none;
-    border-radius: 4px;
+// Variables for consistent styling
+$primary-color: dodgerblue;
+$secondary-color: #f0f0f0;
+$text-color: #333;
+$highlight-color: #ffcc00;
+
+// General styles for the movie-view
+.movie-view {
+  padding: 20px;
+  background-color: $secondary-color;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+
+  .movie-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: $primary-color;
+    margin-bottom: 10px;
+    text-align: center;
   }
+
+  .movie-description {
+    font-size: 1rem;
+    color: $text-color;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    text-align: justify;
+  }
+
+  .movie-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .detail {
+      font-size: 1rem;
+      color: $text-color;
+
+      span {
+        font-weight: bold;
+        color: $primary-color;
+      }
+    }
+  }
+
+  .back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: whitesmoke;
+    background-color: $primary-color;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+}
