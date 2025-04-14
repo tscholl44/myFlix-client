@@ -29,9 +29,9 @@ a {
 
 // Navbar Styling
 .navbar {
-  background-color: $secondary-color;
+  background-color: $primary-color;
   .navbar-brand, .nav-link {
-    color: #fff !important;
+    color: #6c757d !important;
     &:hover {
       color: $link-hover-color !important;
     }
