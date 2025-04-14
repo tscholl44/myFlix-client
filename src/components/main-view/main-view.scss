@@ -1,0 +1,59 @@
+// Variables for consistent styling
+$primary-color: steelblue;
+$secondary-color: lightgray;
+$background-color: #f9f9f9;
+$text-color: #333;
+
+// General styles for the main view
+.main-view {
+  background-color: $background-color;
+  padding: 20px;
+  min-height: 100vh;
+
+  .movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .movie-card {
+    background-color: $secondary-color;
+    border: 1px solid $primary-color;
+    border-radius: 10px;
+    padding: 15px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      transform: scale(1.05);
+      transition: transform 0.3s ease;
+    }
+
+    .movie-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: $primary-color;
+      margin-bottom: 10px;
+    }
+
+    .movie-genre {
+      font-size: 0.9rem;
+      color: $text-color;
+    }
+  }
+
+  .genre-filter {
+    margin-bottom: 20px;
+    text-align: center;
+
+    select {
+      padding: 10px;
+      border: 1px solid $primary-color;
+      border-radius: 5px;
+      background-color: $secondary-color;
+      color: $text-color;
+    }
+  }
+}
