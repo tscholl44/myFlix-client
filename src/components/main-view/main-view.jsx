@@ -7,6 +7,7 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
 export const MainView = () => {
@@ -15,6 +16,7 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(storedUser);
   const [token, setToken] = useState(storedToken);
+  const [selectedGenre, setSelectedGenre] = useState(""); // State for the selected genre
 
   useEffect(() => {
     if (!token) {
@@ -77,6 +79,14 @@ export const MainView = () => {
     .catch(error => console.error('Error updating favorite movies:', error));
   };
 
+  // Filter movies based on the selected genre
+  const filteredMovies = selectedGenre
+    ? movies.filter((movie) => movie.genre.name === selectedGenre)
+    : movies;
+
+  // Extract unique genres for the dropdown
+  const genres = [...new Set(movies.map((movie) => movie.genre.name))];
+
   return (
     <BrowserRouter>
       <NavigationBar
@@ -86,6 +96,20 @@ export const MainView = () => {
         }}
       />
       <Row className="justify-content-md-center">
+        {/* Dropdown for filtering by genre */}
+        <Form.Select
+          className="mb-4"
+          value={selectedGenre}
+          onChange={(e) => setSelectedGenre(e.target.value)} // Update selected genre
+        >
+          <option value="">All Genres</option>
+          {genres.map((genre) => (
+            <option key={genre} value={genre}>
+              {genre}
+            </option>
+          ))}
+        </Form.Select>
+
         <Routes>
           <Route
             path="/signup"
@@ -157,17 +181,17 @@ export const MainView = () => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
+                ) : filteredMovies.length === 0 ? (
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
+                    {filteredMovies.map((movie) => (
                       <Col className="mb-4" key={movie._id} md={3}>
                         <MovieCard
                           movie={movie}
                           user={user}
                           setUser={setUser}
-                          handleFavoriteUpdate={handleFavoriteUpdate} // Pass the function here
+                          handleFavoriteUpdate={handleFavoriteUpdate}
                         />
                       </Col>
                     ))}
