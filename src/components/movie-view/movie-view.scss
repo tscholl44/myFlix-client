@@ -46,17 +46,11 @@ $highlight-color: #ffcc00;
   }
 
   .back-button {
-    display: inline-block;
-    padding: 10px 20px;
+    padding: 4px 12px 4px 12px;
     color: whitesmoke;
-    background-color: $primary-color;
+    background-color: dodgerblue;
     border: none;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    border-radius: 4px;
 
     &:hover {
       background-color: darken($primary-color, 10%);
