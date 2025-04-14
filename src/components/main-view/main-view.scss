@@ -11,48 +11,51 @@ $text-color: #333;
   min-height: 100vh;
 
   .movie-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+    @extend .d-flex;
+    @extend .flex-wrap;
+    @extend .justify-content-center;
+    gap: 20px; // Bootstrap doesn't have a gap utility yet, so we add it here
   }
 
   .movie-card {
+    @extend .card;
+    width: 18rem; // Bootstrap card width
     background-color: $secondary-color;
     border: 1px solid $primary-color;
     border-radius: 10px;
-    padding: 15px;
-    width: 250px;
-    text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 
     &:hover {
       transform: scale(1.05);
-      transition: transform 0.3s ease;
     }
 
-    .movie-title {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: $primary-color;
-      margin-bottom: 10px;
-    }
+    .card-body {
+      @extend .text-center;
 
-    .movie-genre {
-      font-size: 0.9rem;
-      color: $text-color;
+      .movie-title {
+        @extend .h5;
+        color: $primary-color;
+        margin-bottom: 10px;
+      }
+
+      .movie-genre {
+        @extend .text-muted;
+        font-size: 0.9rem;
+      }
     }
   }
 
   .genre-filter {
-    margin-bottom: 20px;
-    text-align: center;
+    @extend .mb-4;
+    @extend .text-center;
 
     select {
-      padding: 10px;
-      border: 1px solid $primary-color;
-      border-radius: 5px;
+      @extend .form-select;
+      max-width: 300px;
+      margin: 0 auto;
       background-color: $secondary-color;
+      border-color: $primary-color;
       color: $text-color;
     }
   }
