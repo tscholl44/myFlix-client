@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MovieCard } from '../movie-card/movie-card';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 
 export const ProfileView = ({ user, token, movies, setUser, handleFavoriteUpdate }) => {
