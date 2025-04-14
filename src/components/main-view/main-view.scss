@@ -11,7 +11,7 @@ $text-color: #333;
   min-height: 100vh;
 
   .movie-list {
-    @extend .d-flex;
+    @extend .d-flex !optional;
     @extend .flex-wrap;
     @extend .justify-content-center;
     gap: 20px; // Bootstrap doesn't have a gap utility yet, so we add it here
