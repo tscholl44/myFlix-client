@@ -12,48 +12,47 @@ $movie-highlight-color: #ffcc00;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
   max-width: 800px !important;
   margin: 20px auto !important;
+}
+.movie-title {
+  font-size: 2rem !important;
+  font-weight: bold !important;
+  color: $movie-primary-color !important;
+  margin-bottom: 10px !important;
+  text-align: center !important;
+}
 
-  .movie-title {
-    font-size: 2rem !important;
-    font-weight: bold !important;
-    color: $movie-primary-color !important;
-    margin-bottom: 10px !important;
-    text-align: center !important;
-  }
+.movie-description {
+  font-size: 1rem !important;
+  color: $movie-text-color !important;
+  margin-bottom: 20px !important;
+  line-height: 1.6 !important;
+  text-align: justify !important;
+}
 
-  .movie-description {
+.movie-details {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+
+  .detail {
     font-size: 1rem !important;
     color: $movie-text-color !important;
-    margin-bottom: 20px !important;
-    line-height: 1.6 !important;
-    text-align: justify !important;
-  }
 
-  .movie-details {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-
-    .detail {
-      font-size: 1rem !important;
-      color: $movie-text-color !important;
-
-      span {
-        font-weight: bold !important;
-        color: $movie-primary-color !important;
-      }
+    span {
+      font-weight: bold !important;
+      color: $movie-primary-color !important;
     }
   }
+}
 
-  .back-button {
-    padding: 4px 12px 4px 12px;
-    color: whitesmoke;
-    background-color: dodgerblue;
-    border: none;
-    border-radius: 4px;
+.back-button {
+  padding: 4px 12px 4px 12px;
+  color: whitesmoke;
+  background-color: dodgerblue;
+  border: none;
+  border-radius: 4px;
 
-    &:hover {
-      background-color: darken($movie-primary-color, 10%);
-    }
+  &:hover {
+    background-color: darken($movie-primary-color, 10%);
   }
 }
