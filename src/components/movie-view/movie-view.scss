@@ -23,6 +23,7 @@ $movie-highlight-color: #ffcc00;
 
 .movie-description {
   font-size: 1rem;
+  font-weight: bold;
   color: $movie-primary-color;
   margin-bottom: 20px;
   line-height: 1.6;
@@ -36,7 +37,8 @@ $movie-highlight-color: #ffcc00;
 
   .detail {
     font-size: 1rem;
-    color: $movie-text-color;
+    font-weight: bold;
+    color: $movie-primary-color;
 
     span {
       font-weight: bold;
