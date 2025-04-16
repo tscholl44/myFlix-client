@@ -13,34 +13,28 @@ $movie-highlight-color: #ffcc00;
   max-width: 800px;
   margin: 20px auto;
 }
+
 .movie-title {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 2rem;
+  font-size: 1.5rem; 
   font-weight: bold;
   color: $movie-primary-color;
-  text-align: justify;
+  text-align: left;
 
-  span {
-    font-weight: bold;
-    color: $movie-primary-color;
+  .label {
+    font-weight: normal;
+    margin-right: 8px; // Add spacing between "Title:" and the actual title
   }
-  
 }
 
 .movie-description {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 1rem;
+  font-size: 1.5rem; 
   font-weight: bold;
   color: $movie-primary-color;
-  text-align: justify;
-  
-  span {
-    font-weight: bold;
-    color: $movie-primary-color;
+  text-align: left;
+
+  .label {
+    font-weight: normal;
+    margin-right: 8px; // Add spacing between "Title:" and the actual title
   }
 }
 
