@@ -6,41 +6,41 @@ $movie-highlight-color: #ffcc00;
 
 // General styles for the movie-view
 .movie-view {
-  padding: 20px !important;
-  background-color: $movie-secondary-color !important;
-  border-radius: 10px !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
-  max-width: 800px !important;
-  margin: 20px auto !important;
+  padding: 20px;
+  background-color: $movie-secondary-color;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
 }
 .movie-title {
-  font-size: 2rem !important;
-  font-weight: bold !important;
-  color: $movie-primary-color !important;
-  margin-bottom: 10px !important;
-  text-align: center !important;
+  font-size: 2rem;
+  font-weight: bold;
+  color: $movie-primary-color;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .movie-description {
-  font-size: 1rem !important;
-  color: $movie-text-color !important;
-  margin-bottom: 20px !important;
-  line-height: 1.6 !important;
-  text-align: justify !important;
+  font-size: 1rem;
+  color: $movie-text-color;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  text-align: justify;
 }
 
 .movie-details {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 10px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
   .detail {
-    font-size: 1rem !important;
-    color: $movie-text-color !important;
+    font-size: 1rem;
+    color: $movie-text-color;
 
     span {
-      font-weight: bold !important;
-      color: $movie-primary-color !important;
+      font-weight: bold;
+      color: $movie-primary-color;
     }
   }
 }
