@@ -28,35 +28,37 @@ export const MovieView = ({ movies }) => {
           alt={movie.title}
         />
       </div>
-      <div>
-        <span className="movie-title"> Title: </span>
-        <span>{movie.title}</span>
+      <div className="movie-view">
+        <div>
+          <h1 className="movie-title"> Title: </h1>
+          <span>{movie.title}</span>
+        </div>
+        <div>
+          <p className="movie-description">Description: </p>
+          <span>{movie.description}</span>
+        </div>
+        <div className="movie-details">
+          <div>
+            <span className="detail">Genre: </span>
+            <span>{movie.genre.name}</span>
+          </div>
+          <div>
+            <span className="detail">Genre Description: </span>
+            <span>{movie.genre.description}</span>
+          </div>
+          <div>
+            <span className="detail">Director: </span>
+            <span>{movie.director.name}</span>
+          </div>
+          <div>
+            <span className="detail">Director Bio: </span>
+            <span>{movie.director.bio}</span>
+          </div>
+        </div>
+        <Link to={`/`}>
+          <button className="back-button">Back</button>
+        </Link>
       </div>
-      <div>
-        <span className="movie-description">Description: </span>
-        <span>{movie.description}</span>
-      </div>
-      <div className="movie-details">
-        <div>
-          <span className="detail">Genre: </span>
-          <span>{movie.genre.name}</span>
-        </div>
-        <div>
-          <span className="detail">Genre Description: </span>
-          <span>{movie.genre.description}</span>
-        </div>
-        <div>
-          <span className="detail">Director: </span>
-          <span>{movie.director.name}</span>
-        </div>
-        <div>
-          <span className="detail">Director Bio: </span>
-          <span>{movie.director.bio}</span>
-        </div>
-      </div>
-      <Link to={`/`}>
-        <button className="back-button">Back</button>
-      </Link>
     </div>
   );
 };
