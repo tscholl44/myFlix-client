@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // Import useLocation for route detection
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
@@ -11,6 +12,7 @@ import Form from "react-bootstrap/Form";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
 export const MainView = () => {
+  const location = useLocation(); // Get the current route
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
   const [movies, setMovies] = useState([]);
@@ -53,6 +55,12 @@ export const MainView = () => {
         console.error("Error fetching movies:", error);
       });
   }, [token]);
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setSelectedGenre(""); // Reset the selected genre
+    }
+  }, [location]);
 
   const handleFavoriteUpdate = (movieId, action) => {
     fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/${user.name}/favoriteMovies/${movieId}`, {
