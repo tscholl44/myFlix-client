@@ -10,6 +10,13 @@ export const MovieCard = ({ movie, user, handleFavoriteUpdate }) => {
     const action = isFavorite ? "remove" : "add";
     console.log(`toggleFavorite called for movieId: ${movie._id}, action: ${action}`);
     handleFavoriteUpdate(movie._id, action);
+
+    // Update localStorage directly
+    user.favoriteMovies = action === "add"
+      ? [...user.favoriteMovies, movie._id]
+      : user.favoriteMovies.filter((id) => id !== movie._id);
+
+    localStorage.setItem("user", JSON.stringify(user));
   };
 
   return (
