@@ -33,7 +33,7 @@ export const MovieCard = ({ movie, user, handleFavoriteUpdate }) => {
           className="mt-2"
           onClick={toggleFavorite}
         >
-          Add / Remove Favorite
+          {isFavorite ? 'Remove' : 'Add'}
         </Button>
       </Card.Body>
     </Card>
