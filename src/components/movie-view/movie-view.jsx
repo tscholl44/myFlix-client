@@ -24,7 +24,7 @@ export const MovieView = ({ movies }) => {
       <div>
         <img
           className="w-100"
-          src={movie.image || "https://via.placeholder.com/300x450?text=No+Image+Available"}
+          src={movie.imagePath || "https://via.placeholder.com/300x450?text=No+Image+Available"}
           alt={movie.title}
         />
       </div>

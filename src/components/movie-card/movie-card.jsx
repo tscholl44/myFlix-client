@@ -21,7 +21,7 @@ export const MovieCard = ({ movie, user, handleFavoriteUpdate }) => {
 
   return (
     <Card className="h-100 shadow-sm">
-      <Card.Img variant="top" src={movie.ImagePath} alt={movie.title} />
+      <Card.Img variant="top" src={movie.imagePath} alt={movie.title} />
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title>
         <Card.Text>{movie.description.substring(0, 100)}...</Card.Text>
