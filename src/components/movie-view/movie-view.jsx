@@ -31,11 +31,11 @@ export const MovieView = ({ movies }) => {
       <div className="movie-view">
         <div>
           <h1 className="movie-title"> Title: </h1>
-          <span>{movie.title}</span>
+          <span className="label">{movie.title}</span>
         </div>
         <div>
           <p className="movie-description">Description: </p>
-          <span>{movie.description}</span>
+          <span className="label">{movie.description}</span>
         </div>
         <div className="movie-details">
           <div>
