@@ -4,7 +4,7 @@ $movie-secondary-color: #f0f0f0;
 $movie-text-color: #333;
 $movie-highlight-color: #ffcc00;
 
-// General styles for the movie-view
+// Styles for the movie-view
 .movie-view {
   padding: 20px;
   background-color: $movie-secondary-color;
@@ -31,6 +31,7 @@ $movie-highlight-color: #ffcc00;
   font-weight: bold;
   color: $movie-primary-color;
   text-align: left;
+  margin-bottom: 10px;
 
   .label {
     font-weight: normal;
