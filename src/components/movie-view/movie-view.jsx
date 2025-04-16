@@ -29,28 +29,28 @@ export const MovieView = ({ movies }) => {
         />
       </div>
       <div>
-        <span classname="movie-title"> Title: </span>
+        <span className="movie-title"> Title: </span>
         <span>{movie.title}</span>
       </div>
       <div>
-        <span classname="movie-description">Description: </span>
+        <span className="movie-description">Description: </span>
         <span>{movie.description}</span>
       </div>
       <div className="movie-details"></div>
         <div>
-          <span classname="detail">Genre: </span>
+          <span className="detail">Genre: </span>
           <span>{movie.genre.name}</span>
         </div>
         <div>
-          <span classname="detail">Genre Description: </span>
+          <span className="detail">Genre Description: </span>
           <span>{movie.genre.description}</span>
         </div>
         <div>
-          <span classname="detail">Director: </span>
+          <span className="detail">Director: </span>
           <span>{movie.director.name}</span>
         </div>
         <div>
-          <span classname="detail">Director Bio: </span>
+          <span className="detail">Director Bio: </span>
           <span>{movie.director.bio}</span>
         </div>
       <Link to={`/`}>
