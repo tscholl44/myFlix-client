@@ -31,12 +31,7 @@ $movie-highlight-color: #ffcc00;
   font-weight: bold;
   color: $movie-primary-color;
   text-align: left;
-  margin-bottom: 100px;
-
-  .label {
-    font-weight: normal;
-    margin-right: 8px; // Add spacing between "Title:" and the actual title
-  }
+  margin-bottom: 20px; // Increase the margin to add more space below
 }
 
 .movie-details {
