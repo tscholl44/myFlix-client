@@ -21,6 +21,12 @@ $movie-highlight-color: #ffcc00;
   font-weight: bold;
   color: $movie-primary-color;
   text-align: justify;
+
+  span {
+    font-weight: bold;
+    color: $movie-primary-color;
+  }
+  
 }
 
 .movie-description {
@@ -31,6 +37,11 @@ $movie-highlight-color: #ffcc00;
   font-weight: bold;
   color: $movie-primary-color;
   text-align: justify;
+  
+  span {
+    font-weight: bold;
+    color: $movie-primary-color;
+  }
 }
 
 .movie-details {
