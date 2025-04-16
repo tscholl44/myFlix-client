@@ -30,11 +30,11 @@ export const MovieView = ({ movies }) => {
       </div>
       <div className="movie-view">
         <div>
-          <h1 className="movie-title"> Title: </h1>
+          <span className="movie-title"> Title: </span>
             <span className="label">{movie.title}</span>
         </div>
         <div>
-          <p className="movie-description">Description: </p>
+          <span className="movie-description">Description: </span>
             <span className="label">{movie.description}</span>
         </div>
         <div className="movie-details">
