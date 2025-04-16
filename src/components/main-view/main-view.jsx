@@ -96,20 +96,6 @@ export const MainView = () => {
         }}
       />
       <Row className="justify-content-md-center">
-        {/* Dropdown for filtering by genre */}
-        <Form.Select
-          className="mb-4"
-          value={selectedGenre}
-          onChange={(e) => setSelectedGenre(e.target.value)} // Update selected genre
-        >
-          <option value="">All Genres</option>
-          {genres.map((genre) => (
-            <option key={genre} value={genre}>
-              {genre}
-            </option>
-          ))}
-        </Form.Select>
-
         <Routes>
           <Route
             path="/signup"
@@ -185,6 +171,20 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
+                    {/* Dropdown for filtering by genre */}
+                    <Form.Select
+                      className="mb-4"
+                      value={selectedGenre}
+                      onChange={(e) => setSelectedGenre(e.target.value)} // Update selected genre
+                    >
+                      <option value="">All Genres</option>
+                      {genres.map((genre) => (
+                        <option key={genre} value={genre}>
+                          {genre}
+                        </option>
+                      ))}
+                    </Form.Select>
+
                     {filteredMovies.map((movie) => (
                       <Col className="mb-4" key={movie._id} md={3}>
                         <MovieCard
