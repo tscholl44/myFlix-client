@@ -12,10 +12,10 @@ export const SignupView = () => {
     event.preventDefault();
 
     const data = {
-      Username: name,
-      Password: password,
-      Email: email,
-      Birthday: birthday
+      name,
+      password,
+      email,
+      birthday
     };
 
     fetch(`https://toms-flix-a1bb67bc1c05.herokuapp.com/users/`, {
