@@ -20,21 +20,30 @@ export const MovieCard = ({ movie, user, handleFavoriteUpdate }) => {
   };
 
   return (
-    <Card className="h-100 shadow-sm">
-      <Card.Img variant="top" src={movie.imagePath} alt={movie.title} />
+    <Card className="h-100 fade-in">
+      <div style={{ position: 'relative' }}>
+        <Card.Img variant="top" src={movie.imagePath} alt={movie.title} />
+        <div className="card-overlay"></div>
+      </div>
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title>
         <Card.Text>{movie.description.substring(0, 100)}...</Card.Text>
-        <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-          <Button variant="link">More Details</Button>
-        </Link>
-        <Button
-          variant={isFavorite ? 'danger' : 'primary'}
-          className="mt-2"
-          onClick={toggleFavorite}
-        >
-          {isFavorite ? 'Remove' : 'Add'}
-        </Button>
+        <div className="d-flex flex-column gap-2">
+          <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
+            <Button variant="link" className="w-100 text-start p-0">
+              ▶ Watch Now
+            </Button>
+          </Link>
+          <Button
+            variant={isFavorite ? 'danger' : 'outline-light'}
+            size="sm"
+            onClick={toggleFavorite}
+            className="d-flex align-items-center justify-content-center gap-2"
+          >
+            <span>{isFavorite ? '❤️' : '🤍'}</span>
+            {isFavorite ? 'Remove from List' : 'Add to My List'}
+          </Button>
+        </div>
       </Card.Body>
     </Card>
   );
