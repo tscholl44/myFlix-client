@@ -31,7 +31,7 @@ export const MovieCard = ({ movie, user, handleFavoriteUpdate }) => {
         <div className="d-flex flex-column gap-2">
           <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
             <Button variant="link" className="w-100 text-start p-0">
-              ▶ See Details
+              ▶ More Info
             </Button>
           </Link>
           <Button
