@@ -1,70 +1,646 @@
 // Import Bootstrap
 @import '~bootstrap/scss/bootstrap.scss';
 
-// Custom Variables
-$primary-color: #007bff; // Bootstrap primary color
-$secondary-color: #6c757d; // Bootstrap secondary color
-$background-color: #f8f9fa; // Light background
-$text-color: #343a40; // Dark text color
-$link-hover-color: #0056b3;
+// Netflix/Hulu-inspired Color Palette
+$netflix-red: #e50914;
+$netflix-dark: #141414;
+$netflix-darker: #0f0f0f;
+$hulu-green: #1ce783;
+$streaming-gray: #2f2f2f;
+$light-gray: #8c8c8c;
+$card-gray: #1a1a1a;
+$hover-gray: #333333;
 
-// Global Styles
-body {
-  background-color: $background-color;
-  color: $text-color;
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-}
+// Primary color scheme
+$primary-color: $netflix-red;
+$secondary-color: $streaming-gray;
+$background-color: $netflix-dark;
+$text-color: #ffffff;
+$link-hover-color: #f40612;
+$accent-color: $hulu-green;
 
-a {
-  color: $primary-color;
-  text-decoration: none;
+// Profile Page Styling
+.profile-container {
+  .profile-header {
+    background: linear-gradient(135deg, $streaming-gray, $card-gray);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 
-  &:hover {
-    color: $link-hover-color;
-    text-decoration: underline;
+    h1 {
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .form-control {
+    background: rgba(51, 51, 51, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    color: white;
+
+    &:focus {
+      background: rgba(51, 51, 51, 0.95);
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.2);
+      color: white;
+    }
+  }
+
+  .form-label {
+    color: $light-gray;
+    font-weight: 500;
   }
 }
 
-// Navbar Styling
+// Global Styles
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $background-color;
+  color: $text-color;
+  font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  color: $text-color;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: $primary-color;
+    text-decoration: none;
+  }
+}
+
+// Navbar Styling - Netflix-inspired
 .navbar {
-  background-color: $primary-color;
-  .navbar-brand, .nav-link {
-    color: #6c757d !important;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(229, 9, 20, 0.3);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+
+  &.scrolled {
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(15px);
+  }
+
+  .navbar-brand {
+    color: $primary-color !important;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: -1px;
+    transition: all 0.3s ease;
+
     &:hover {
       color: $link-hover-color !important;
+      transform: scale(1.05);
+    }
+  }
+
+  .nav-link {
+    color: $text-color !important;
+    font-weight: 500;
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem !important;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: $text-color !important;
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    &.active {
+      background-color: $primary-color;
+      color: white !important;
+    }
+  }
+
+  .navbar-toggler {
+    border: none;
+    padding: 0.25rem 0.5rem;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
   }
 }
 
-// Buttons
-.btn-primary {
-  background-color: $primary-color;
-  border-color: $primary-color;
-  &:hover {
-    background-color: darken($primary-color, 10%);
-    border-color: darken($primary-color, 10%);
+// Buttons - Modern streaming platform style
+.btn {
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0.75rem 1.5rem;
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.3);
   }
 }
 
-// Custom Container
-.container {
-  padding: 20px;
-  margin-top: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.btn-primary {
+  background: linear-gradient(135deg, $primary-color, #c40610);
+  color: white;
+  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+
+  &:hover {
+    background: linear-gradient(135deg, $link-hover-color, #a8050d);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 9, 20, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 }
 
-// Footer
+.btn-danger {
+  background: linear-gradient(135deg, #dc3545, #a02834);
+  color: white;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+
+  &:hover {
+    background: linear-gradient(135deg, #c82333, #8b1e2b);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+  }
+}
+
+.btn-link {
+  color: $accent-color;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+
+  &:hover {
+    color: lighten($accent-color, 10%);
+    text-decoration: none;
+    transform: translateX(5px);
+  }
+}
+
+.btn-outline-light {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: $text-color;
+  background: transparent;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    transform: translateY(-2px);
+  }
+}
+
+// Custom Container - Netflix-style
+.container {
+  padding: 2rem 1rem;
+  margin-top: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  max-width: 1400px;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+// Movie Grid Layout
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+}
+
+// Movie Cards - Netflix-inspired
+.card {
+  background: linear-gradient(145deg, $card-gray, lighten($card-gray, 5%));
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+
+  &:hover {
+    transform: scale(1.05) translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+    z-index: 10;
+
+    .card-img-top {
+      transform: scale(1.1);
+      filter: brightness(1.1);
+    }
+
+    .card-overlay {
+      opacity: 1;
+    }
+  }
+
+  .card-img-top {
+    height: 400px;
+    object-fit: cover;
+    transition: all 0.4s ease;
+    filter: brightness(0.9);
+
+    @media (max-width: 768px) {
+      height: 300px;
+    }
+  }
+
+  .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .card-body {
+    background: linear-gradient(to bottom, $card-gray, $netflix-darker);
+    color: $text-color;
+    padding: 1.5rem;
+    position: relative;
+    z-index: 5;
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.75rem;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .card-text {
+      color: $light-gray;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+// Genre Filter Dropdown
+.form-select {
+  background: linear-gradient(145deg, $streaming-gray, lighten($streaming-gray, 10%));
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: $text-color;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  &:focus {
+    background: linear-gradient(145deg, lighten($streaming-gray, 5%), lighten($streaming-gray, 15%));
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.2);
+    color: white;
+  }
+
+  option {
+    background: $streaming-gray;
+    color: $text-color;
+    padding: 0.5rem;
+  }
+}
+
+// Footer - Sleek streaming platform style
 .footer {
-  background-color: $secondary-color;
-  color: #fff;
+  background: linear-gradient(to top, $netflix-darker, rgba(20, 20, 20, 0.95));
+  color: $light-gray;
   text-align: center;
-  padding: 10px;
-  position: fixed;
-  bottom: 0;
+  padding: 2rem 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 4rem;
+  position: relative;
   width: 100%;
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  }
+}
+
+// Loading States
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: $light-gray;
+  font-size: 1.1rem;
+}
+
+.spinner-border {
+  color: $primary-color;
+}
+
+// Empty State
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: $light-gray;
+
+  h3 {
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+  }
+}
+
+// Responsive Design
+@media (max-width: 1200px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar .navbar-brand {
+    font-size: 1.5rem;
+  }
+
+  .card .card-body {
+    padding: 1rem;
+    
+    .card-title {
+      font-size: 1.1rem;
+    }
+    
+    .card-text {
+      font-size: 0.85rem;
+    }
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .card .card-img-top {
+    height: 250px;
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+// Custom Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $netflix-dark;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $streaming-gray;
+  border-radius: 4px;
+
+  &:hover {
+    background: lighten($streaming-gray, 20%);
+  }
+}
+
+// Auth Forms - Netflix/Hulu style
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0.75)
+  ), url('https://assets.nflxext.com/ffe/siteui/vlv3/web/background.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  background: linear-gradient(145deg, rgba(20, 20, 20, 0.95), rgba(0, 0, 0, 0.9));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  max-width: 450px;
+  width: 100%;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+
+  @media (max-width: 576px) {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+
+  h1, h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: bold;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    color: $light-gray;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-control {
+    background: rgba(51, 51, 51, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: white;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+      background: rgba(51, 51, 51, 0.95);
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.2);
+      color: white;
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .btn {
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+
+  .auth-link {
+    text-align: center;
+    margin-top: 2rem;
+    color: $light-gray;
+
+    a {
+      color: $primary-color;
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover {
+        color: $link-hover-color;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Movie Hero Section - Netflix-style detail page
+.movie-hero {
+  .movie-hero-bg {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .movie-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 4rem 0;
+
+    @media (max-width: 768px) {
+      padding: 2rem 0;
+    }
+  }
+
+  .movie-details-section {
+    z-index: 3;
+    position: relative;
+  }
+
+  .movie-title {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 768px) {
+      font-size: 2.5rem !important;
+    }
+  }
+
+  .movie-meta {
+    .badge {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .movie-description {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    font-size: 1.2rem;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
+  .info-item {
+    h5 {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .movie-actions {
+    .btn {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border-width: 2px;
+    }
+  }
+
+  .movie-poster-desktop img,
+  .movie-poster-mobile img {
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
 }
 
