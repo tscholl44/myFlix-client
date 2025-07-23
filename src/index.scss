@@ -21,6 +21,12 @@ $accent-color: $hulu-green;
 
 // Profile Page Styling
 .profile-container {
+  .card {
+    background: linear-gradient(145deg, $card-gray, lighten($card-gray, 5%));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
   .profile-header {
     background: linear-gradient(135deg, $streaming-gray, $card-gray);
     border-radius: 12px;
@@ -48,7 +54,7 @@ $accent-color: $hulu-green;
   }
 
   .form-label {
-    color: $light-gray;
+    color: white !important;
     font-weight: 500;
   }
 }
