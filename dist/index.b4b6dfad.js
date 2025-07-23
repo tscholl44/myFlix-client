@@ -19030,7 +19030,7 @@ const MovieCard = ({ movie, user, handleFavoriteUpdate })=>{
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                                     variant: "link",
                                     className: "w-100 text-start p-0",
-                                    children: "\u25B6 Watch Now"
+                                    children: "\u25B6 Watch Trailer"
                                 }, void 0, false, {
                                     fileName: "src/components/movie-card/movie-card.jsx",
                                     lineNumber: 33,
