@@ -66,12 +66,12 @@ export const MovieView = ({ movies }) => {
                 <div className="info-item mb-3">
                   <h5 className="text-danger mb-2">Director</h5>
                   <p className="text-light mb-1 fs-5 fw-semibold">{movie.director.name}</p>
-                  <p className="text-muted small">{movie.director.bio}</p>
+                  <p className="text-light small">{movie.director.bio}</p>
                 </div>
                 
                 <div className="info-item mb-3">
                   <h5 className="text-danger mb-2">Genre</h5>
-                  <p className="text-muted">{movie.genre.description}</p>
+                  <p className="text-light">{movie.genre.description}</p>
                 </div>
               </div>
               
