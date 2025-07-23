@@ -67,31 +67,31 @@ export const ProfileView = ({ user, token, movies, setUser, handleFavoriteUpdate
     };
 
     return (
-        <Container className="profile-view mt-4">
+        <Container className="profile-view profile-container mt-4">
             <Card className="p-4 shadow">
-                <h2 className="mb-4 text-center">Profile</h2>
+                <h2 className="mb-4 text-center text-white">Profile</h2>
                 <Form onSubmit={handleUpdate}>
                     <Form.Group className="mb-3">
-                        <Form.Label>Username</Form.Label>
+                        <Form.Label className="text-white">Username</Form.Label>
                         <Form.Control type="text" value={updatedUser.name} onChange={e => setUpdatedUser({...updatedUser, Username: e.target.value})} required />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label className="text-white">Password</Form.Label>
                         <Form.Control type="password" onChange={e => setUpdatedUser({...updatedUser, Password: e.target.value})} required />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Email</Form.Label>
+                        <Form.Label className="text-white">Email</Form.Label>
                         <Form.Control type="email" value={updatedUser.Email} onChange={e => setUpdatedUser({...updatedUser, Email: e.target.value})} required />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Date of Birth</Form.Label>
+                        <Form.Label className="text-white">Date of Birth</Form.Label>
                         <Form.Control type="date" value={updatedUser.Birthday} onChange={e => setUpdatedUser({...updatedUser, Birthday: e.target.value})} required />
                     </Form.Group>
                     <Button variant="primary" type="submit" className="w-100">Update Profile</Button>
                 </Form>
                 <Button variant="danger" onClick={handleDelete} className="w-100 mt-3">Delete Account</Button>
             </Card>
-            <h3 className="mt-5">Favorite Movies</h3>
+            <h3 className="mt-5 text-white">Favorite Movies</h3>
             <Row className="mt-3">
                 {userFavoriteMovies.length > 0 ? (
                     userFavoriteMovies.map(movie => (
