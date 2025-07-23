@@ -7,6 +7,7 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 
@@ -96,7 +97,7 @@ export const MainView = () => {
           setUser(null);
         }}
       />
-      <Row className="justify-content-md-center">
+      <Container fluid>
         <Routes>
           <Route
             path="/signup"
@@ -169,40 +170,48 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : filteredMovies.length === 0 ? (
-                  <Col>The list is empty!</Col>
+                  <div className="empty-state">
+                    <h3>No movies found</h3>
+                    <p>Try adjusting your filter or check back later for new releases!</p>
+                  </div>
                 ) : (
-                  <>
-                    {/* Dropdown for filtering by genre */}
-                    <Form.Select
-                      className="mb-4"
-                      value={selectedGenre}
-                      onChange={(e) => setSelectedGenre(e.target.value)} // Update selected genre
-                    >
-                      <option value="">All Genres</option>
-                      {genres.map((genre) => (
-                        <option key={genre} value={genre}>
-                          {genre}
-                        </option>
-                      ))}
-                    </Form.Select>
+                  <Container>
+                    {/* Genre Filter */}
+                    <div className="mb-4">
+                      <Form.Select
+                        className="mb-4"
+                        value={selectedGenre}
+                        onChange={(e) => setSelectedGenre(e.target.value)}
+                        style={{ maxWidth: '300px' }}
+                      >
+                        <option value="">🎭 All Genres</option>
+                        {genres.map((genre) => (
+                          <option key={genre} value={genre}>
+                            {genre}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    </div>
 
-                    {filteredMovies.map((movie) => (
-                      <Col className="mb-4" key={movie._id} md={3}>
+                    {/* Movie Grid */}
+                    <div className="movie-grid">
+                      {filteredMovies.map((movie) => (
                         <MovieCard
+                          key={movie._id}
                           movie={movie}
                           user={user}
                           setUser={setUser}
                           handleFavoriteUpdate={handleFavoriteUpdate}
                         />
-                      </Col>
-                    ))}
-                  </>
+                      ))}
+                    </div>
+                  </Container>
                 )}
               </>
             }
           />
         </Routes>
-      </Row>
+      </Container>
     </BrowserRouter>
   );
 };
